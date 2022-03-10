@@ -1,0 +1,29 @@
+
+spring:
+  application:
+    name: redisdemo
+  redis:
+    database: 0 #redis默认16个库
+    host: 192.168.86.157
+    port: 6379
+    password: ''
+    lettuce:
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-idle: 8
+        max-wait: -1ms
+      shutdown-timeout: 100ms
+    timeout: 10
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/redis_qq_demo?characterEncoding=UTF-8&useUnicode=true&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: Zyz123##
+server:
+  port: 8082
+mybatis:
+  mapper-locations: classpath:mappers/*/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true

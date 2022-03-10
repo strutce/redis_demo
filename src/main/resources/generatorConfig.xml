@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generatorDatabaseConfig.properties"/>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="mergeable" value="true"></property>
+
+        <!--覆盖生成XML文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="${datasource.url}"
+                        userId="${datasource.username}"
+                        password="${datasource.password}">
+        </jdbcConnection>
+
+        <!-- 将decimal等类型解析为BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.demo.redis" targetProject="./src/main/java">
+<!--            <property name="rootClass" value="com.rsc.igas.BaseEntity"/>-->
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mappers" targetProject="./src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.demo.redis" targetProject="./src/main/java" type="XMLMAPPER"/>
+
+        <!-- 系统管理模块 -->
+
+        <table tableName="t_user" domainObjectName="entity.UserEntity"
+               enableCountByExample="false" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
+
+        <table tableName="t_message" domainObjectName="entity.MessageEntity"
+               enableCountByExample="false" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
+
+    </context>
+</generatorConfiguration>
